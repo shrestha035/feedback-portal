@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Get in Touch</title>
+  <meta name="description" content="Reach out to us through our elegant contact form. We're here to help and answer any questions you may have.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --background: 220 20% 8%;
+      --foreground: 210 40% 98%;
+      --card: 220 20% 12%;
+      --card-foreground: 210 40% 98%;
+      --primary: 180 85% 45%;
+      --primary-foreground: 220 20% 8%;
+      --accent: 40 95% 60%;
+      --accent-foreground: 220 20% 8%;
+      --muted: 220 15% 20%;
+      --muted-foreground: 210 20% 65%;
+      --destructive: 0 84% 60%;
+      --border: 220 15% 25%;
+      --input: 220 15% 25%;
+      --ring: 180 85% 45%;
+      --gradient-primary: linear-gradient(135deg, hsl(180, 85%, 45%), hsl(180, 75%, 55%));
+      --gradient-accent: linear-gradient(135deg, hsl(180, 85%, 45%), hsl(40, 95%, 60%));
+      --shadow-glow: 0 0 60px hsl(180 85% 45% / 0.3);
+      --shadow-elevated: 0 20px 40px -10px hsl(180 85% 45% / 0.2);
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(220, 25%, 12%) 100%);
+      color: hsl(var(--foreground));
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, hsl(180 85% 45% / 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, hsl(40 95% 60% / 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px hsl(180 85% 45% / 0.2); }
+      50% { box-shadow: 0 0 40px hsl(180 85% 45% / 0.4); }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 42rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      background: hsl(var(--card) / 0.5);
+      backdrop-filter: blur(20px);
+      border: 1px solid hsl(var(--primary) / 0.2);
+      border-radius: 1rem;
+      padding: 3rem;
+      animation: glow 3s ease-in-out infinite;
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .card-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .icon-wrapper {
+      width: 4rem;
+      height: 4rem;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      background: var(--gradient-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .icon {
+      width: 2rem;
+      height: 2rem;
+      color: white;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: hsl(var(--muted-foreground));
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: hsl(var(--foreground));
+    }
+
+    .label-icon {
+      width: 1rem;
+      height: 1rem;
+      color: hsl(var(--primary));
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: hsl(var(--input));
+      border: 1px solid hsl(var(--border));
+      border-radius: 0.5rem;
+      color: hsl(var(--foreground));
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.875rem;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: hsl(var(--primary));
+      box-shadow: 0 4px 12px hsl(var(--primary) / 0.2);
+    }
+
+    input:disabled, textarea:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    textarea {
+      resize: none;
+      min-height: 150px;
+    }
+
+    .error {
+      color: hsl(var(--destructive));
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 1.5rem;
+      background: var(--gradient-accent);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.125rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 8px 20px hsl(180 85% 45% / 0.3);
+    }
+
+    button:hover:not(:disabled) {
+      opacity: 0.9;
+      box-shadow: 0 12px 30px hsl(180 85% 45% / 0.4);
+      transform: translateY(-2px);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .spinner {
+      width: 1.25rem;
+      height: 1.25rem;
+      border: 2px solid white;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: hsl(var(--card));
+      border: 1px solid hsl(var(--border));
+      border-radius: 0.5rem;
+      padding: 1rem 1.5rem;
+      box-shadow: var(--shadow-elevated);
+      display: none;
+      animation: slideIn 0.3s ease;
+      z-index: 1000;
+      max-width: 400px;
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    .toast.success {
+      border-color: hsl(var(--primary));
+    }
+
+    .toast.error {
+      border-color: hsl(var(--destructive));
+    }
+
+    .toast-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .toast-description {
+      font-size: 0.875rem;
+      color: hsl(var(--muted-foreground));
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* SVG Icons */
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      .card {
+        padding: 2rem 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.875rem;
+      }
+
+      .toast {
+        right: 1rem;
+        left: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <div class="icon-wrapper">
+          <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <rect width="20" height="16" x="2" y="4" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+        </div>
+        <h1>Get in Touch</h1>
+        <p class="subtitle">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+      </div>
+
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">
+            <svg class="label-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            Name
+          </label>
+          <input type="text" id="name" name="name" placeholder="John Doe" required>
+          <div class="error" id="nameError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">
+            <svg class="label-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            Email
+          </label>
+          <input type="email" id="email" name="email" placeholder="john@example.com" required>
+          <div class="error" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">
+            <svg class="label-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+              <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+            </svg>
+            Subject
+          </label>
+          <input type="text" id="subject" name="subject" placeholder="How can we help you?" required>
+          <div class="error" id="subjectError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="message">
+            <svg class="label-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Message
+          </label>
+          <textarea id="message" name="message" placeholder="Tell us more about your inquiry..." required></textarea>
+          <div class="error" id="messageError"></div>
+        </div>
+
+        <button type="submit" id="submitBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="m3 3 3 9-3 9 19-9Z"/>
+            <path d="M6 12h16"/>
+          </svg>
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">
+    <div class="toast-title" id="toastTitle"></div>
+    <div class="toast-description" id="toastDescription"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const toast = document.getElementById('toast');
+
+    function showToast(title, description, type = 'success') {
+      const toastTitle = document.getElementById('toastTitle');
+      const toastDescription = document.getElementById('toastDescription');
+      
+      toastTitle.textContent = title;
+      toastDescription.textContent = description;
+      toast.className = `toast ${type} show`;
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 5000);
+    }
+
+    function showError(fieldId, message) {
+      document.getElementById(fieldId).textContent = message;
+    }
+
+    function clearErrors() {
+      document.querySelectorAll('.error').forEach(el => el.textContent = '');
+    }
+
+    function validateForm(data) {
+      clearErrors();
+      let isValid = true;
+
+      if (!data.name.trim() || data.name.length > 100) {
+        showError('nameError', 'Name is required and must be less than 100 characters');
+        isValid = false;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(data.email) || data.email.length > 255) {
+        showError('emailError', 'Invalid email address');
+        isValid = false;
+      }
+
+      if (!data.subject.trim() || data.subject.length > 200) {
+        showError('subjectError', 'Subject is required and must be less than 200 characters');
+        isValid = false;
+      }
+
+      if (data.message.trim().length < 10 || data.message.length > 1000) {
+        showError('messageError', 'Message must be between 10 and 1000 characters');
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        subject: form.subject.value,
+        message: form.message.value,
+        status: "new"
+      };
+
+      if (!validateForm(data)) {
+        return;
+      }
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <div class="spinner"></div>
+        Sending...
+      `;
+
+      try {
+        const res = await fetch('https://hdzpioilnzktlnilgolg.supabase.co/rest/v1/contact_feedback', {
+          method: 'POST',
+          headers: {
+            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkenBpb2lsbnprdGxuaWxnb2xnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQyNTI1NTMsImV4cCI6MjA3OTgyODU1M30.yHylDl26eHdpeFo85dyfXfiAbkIw4Bio_tJdQERb1B8',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhkenBpb2lsbnprdGxuaWxnb2xnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQyNTI1NTMsImV4cCI6MjA3OTgyODU1M30.yHylDl26eHdpeFo85dyfXfiAbkIw4Bio_tJdQERb1B8',
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+          showToast('Message sent successfully! 🎉', "We'll get back to you as soon as possible.", 'success');
+          form.reset();
+        } else {
+          const error = await res.text();
+          console.error('Error:', error);
+          showToast('Submission failed', 'Please try again later or contact us directly.', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        showToast('Network error', 'Please check your connection and try again.', 'error');
+      } finally {
+        // Reset button
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="m3 3 3 9-3 9 19-9Z"/>
+            <path d="M6 12h16"/>
+          </svg>
+          Send Message
+        `;
+      }
+    });
+  </script>
+
+</body>
+</html>
