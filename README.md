@@ -71,3 +71,25 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+
+
+Database Description
+
+This database is designed to store and manage user-submitted information efficiently and securely. It contains a single table that captures essential details typically collected through contact forms or inquiry submissions. Each record represents an individual message sent by a user.
+
+Table Structure
+
+id (Integer, Primary Key, Auto-Increment)
+A unique identifier assigned to each entry in the database. It ensures that every message can be referenced and retrieved independently.
+
+name (String)
+The full name of the user submitting the form. Used to identify the sender.
+
+email (String)
+The email address of the user. This field enables follow-up communication and verification of the sender.
+
+subject (String)
+A short summary or title of the message content. Helps categorize and prioritize incoming queries.
+
+message (Text)
+The body of the user's message. It stores detailed information, feedback, or inquiries submitted through the form.
